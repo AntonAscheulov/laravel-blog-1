@@ -36,7 +36,7 @@
             <li><a href="blog.html">Portfolios</a></li>
             <li><a href="{{route('contact')}}">Contact</a></li>
             @if(\Illuminate\Support\Facades\Auth::check())
-                <li><a class="text-info" href="{{route('profile')}}">Profile</a></li>
+                <li><a class="text-info" href="{{route('profile')}}">My Profile</a></li>
                 <li><a class="text-info" href="{{route('logout')}}">Logout</a></li>
             @else
                 <li><a class="text-info" href="{{route('registerForm')}}">Register</a></li>
