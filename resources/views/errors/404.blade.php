@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="utf-8">
     <title>Код страницы 404</title>
@@ -44,7 +43,7 @@
 <div class="notfound">
     <div class="404">404</div>
     страница не найдена<br>
-    <a href="#"> перейти на главную страницу..</a>
+    <a href="{{route('index')}}"> перейти на главную страницу..</a>
 </div>
 </body>
 </html>
