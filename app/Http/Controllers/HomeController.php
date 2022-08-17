@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(6);
+        $posts = Post::paginate(3);
         $exhibitions = Exhibition::all();
         return view('pages.index', ['posts' => $posts], ['exhibitions' => $exhibitions]);
     }
@@ -34,6 +34,18 @@ class HomeController extends Controller
         $atrists = Artist::Paginate(6);
         return view('pages.artists', ['artists' => $atrists]);
     }
+
+    public function exhibitions(){
+        $exhibitions = Exhibition::Paginate (6);
+        return view('pages.exhibitions', ['exhibitions' => $exhibitions]);
+    }
+
+    public function portfolios(){
+        $posts = Post::paginate(6);
+        return view('pages.portfolios', ['posts' => $posts]);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -67,10 +79,19 @@ class HomeController extends Controller
         return view('pages.show', ['post' => $post]);
     }
 
+    public function artistSingle($id){
+        $artist = Artist::where('id', $id)->firstOrFail();
+        $posts = $artist->posts()->paginate(3);
+        return view('pages.artistSingle', ['artist' => $artist], ['posts' => $posts]);
+    }
+
+
+
+
     public function tag($slug)
     {
         $tag = Tag::where('slug', $slug)->firstOrFail();
-        $posts = $tag->posts()->paginate(2);
+        $posts = $tag->posts()->paginate(3);
         return view('pages.list', ['posts' => $posts]);
 
     }
@@ -78,7 +99,7 @@ class HomeController extends Controller
     public function category($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $posts = $category->posts()->paginate(2);
+        $posts = $category->posts()->paginate(3);
         return view('pages.list', ['posts' => $posts]);
 
     }

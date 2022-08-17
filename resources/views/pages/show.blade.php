@@ -1,6 +1,37 @@
 @extends('layout')
 
 @section('content')
+    <div class="sp-container">
+        <div class="page-title">
+            <h2>{{$post->title}}</h2>
+        </div>
+
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">By {{$post->getArtistName()}}</h2>
+            <br>
+            <p class="lead">{{ $post->content }}</p>
+            @if($post->category)
+                <a href="{{route('category.show', $post->category->slug)}}" class="btn btn-lg btn-secondary" role="button" aria-pressed="true">{{$post->getCategoryTitle()}}</a>
+            @else
+                <span class="text-muted">{{$post->getCategoryTitle()}}</span>
+            @endif
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="{{asset('storage/'.$post->image)}}" alt="">
+        </div>
+    </div>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group-lg" role="group" aria-label="First group">
+                @foreach($post->tags as $tag)
+                    <a href="{{route('tag.show', $tag->slug)}}" class="btn btn-secondary" role="button" aria-pressed="true">{{$tag->title}}</a>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="main-content">
         <div class="container">
             <div class="row">

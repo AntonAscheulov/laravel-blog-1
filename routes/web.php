@@ -30,8 +30,11 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/post/{slug}', [HomeController::class, 'show'])->name('post.show');
 Route::get('/tag/{slug}', [HomeController::class, 'tag'])->name('tag.show');
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.show');
+Route::get('/artist/{id}', [HomeController::class, 'artistSingle'])->name('artistSingle');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/artists', [HomeController::class, 'artists'])->name('artists');
+Route::get('/exhibitions', [HomeController::class, 'exhibitions'])->name('exhibitions');
+Route::get('/portfolios', [HomeController::class, 'portfolios'])->name('portfolios');
 
 Route::group(['middleware' => 'guest'], function (){
     Route::get('/register', [AuthController::class, 'registerForm'])->name('registerForm');

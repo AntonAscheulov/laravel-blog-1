@@ -32,8 +32,8 @@
             <li><a href="{{route('index')}}">Home</a></li>
             <li><a href="gallery.html">About</a></li>
             <li><a href="{{route('artists')}}">Artists</a></li>
-            <li><a href="elements.html">Exhibitions</a></li>
-            <li><a href="blog.html">Portfolios</a></li>
+            <li><a href="{{route('exhibitions')}}">Exhibitions</a></li>
+            <li><a href="{{route('portfolios')}}">Portfolios</a></li>
             <li><a href="{{route('contact')}}">Contact</a></li>
             @if(\Illuminate\Support\Facades\Auth::check())
                 <li><a class="text-info" href="{{route('profile')}}">My Profile</a></li>
