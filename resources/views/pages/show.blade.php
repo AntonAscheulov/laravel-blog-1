@@ -153,7 +153,6 @@
                         </form>
                     </div><!--end leave comment-->
                 </div>
-                @include('pages._sidebar')
             </div>
         </div>
     </div>

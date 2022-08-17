@@ -17,6 +17,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('users:force-delete')->daily();
         $schedule->command('posts:force-delete')->daily();
+        $schedule->command('artists:force-delete')->daily();
+        $schedule->command('exhibitions:force-delete')->daily();
         $schedule->command('q:work --stop-when-empty')->everyMinute()->withoutOverlapping();
     }
 

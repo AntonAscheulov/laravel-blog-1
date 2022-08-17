@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Artist;
+use App\Models\Exhibition;
 use App\Models\Post;
+use App\Observers\ArtistObserver;
+use App\Observers\ExhibitionObserver;
 use App\Observers\PostObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -16,6 +20,8 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         User::class => [UserObserver::class],
         Post::class => [PostObserver::class],
+        Exhibition::class => [ExhibitionObserver::class],
+        Artist::class => [ArtistObserver::class],
     ];
 
     /**

@@ -28,6 +28,7 @@ class UpdatePostRequest extends FormRequest
             'content' => 'string',
             'description' => 'string',
             'category_id' => 'exists:categories,id',
+            'artist_id' => 'required|exists:artists,id',
             'image' => 'image',
             'tags' => 'array',
             'tags.*' => 'exists:tags,id',

@@ -1,41 +1,28 @@
 @extends('layout')
 
 @section('content')
-    <div class="main-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-
-                    <div class="leave-comment mr0"><!--leave comment-->
-                        @if(session('status'))
-                            <div class="alert alert-danger">{{session('status')}}</div>
-                        @endif
-
-                        <h3 class="text-uppercase">Login</h3>
-                        @include('admin.errors')
-                        <br>
-                        <form class="form-horizontal contact-form" role="form" method="post"
-                              action="{{route('login')}}">
-                            @csrf
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="email" name="email"
-                                           placeholder="Email" value="{{old('email')}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="password" class="form-control" id="password" name="password"
-                                           placeholder="password">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn send-btn">Login</button>
-
-                        </form>
-                    </div><!--end leave comment-->
-                </div>
-                @include('pages._sidebar')
-            </div>
+    <div class="container">
+        <div class="leave-comment mr0"><!--leave comment-->
+            @if(session('status'))
+                <div class="alert alert-danger">{{session('status')}}</div>
+            @endif
         </div>
+        <h3 class="text-uppercase">Login</h3>
+        <br>
+        @include('admin.errors')
+        <form role="form" method="post" action="{{route('login')}}">
+            @csrf
+            <div class="form-group">
+                <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                       placeholder="Enter email" value="{{old('email')}}">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-dark btn-lg btn-block">Login</button>
+        </form>
+        <br>
     </div>
 @endsection

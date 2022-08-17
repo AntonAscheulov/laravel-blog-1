@@ -5,7 +5,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Посты
+                Портфолио
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -20,7 +20,7 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Все посты</h3>
+                    <h3 class="box-title">Все портфолио</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -32,9 +32,11 @@
                         <tr>
                             <th>ID</th>
                             <th>Название</th>
+                            <th>Автор</th>
                             <th>Категория</th>
                             <th>Теги</th>
-                            <th>Картинка</th>
+                            <th>Обложка</th>
+                            <th>Фотографии</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
@@ -43,10 +45,28 @@
                             <tr>
                                 <td>{{$post->id}}</td>
                                 <td>{{$post->title}}</td>
+                                <td>{{$post->getArtistName()}}</td>
                                 <td>{{$post->getCategoryTitle()}}</td>
                                 <td>{{$post->getTagsTitles()}}</td>
                                 <td>
-                                    <img src="{{asset('storage/'.$post->image)}}" alt="" class="img-responsive" width="150">
+                                    <img src="{{asset('storage/'.$post->image)}}" alt="" class="img-responsive"
+                                         width="150">
+                                </td>
+                                <td>
+                                    <div class="carousel slide media-carousel" id="media">
+                                        <div class="carousel-inner">
+                                            <div class="item  active">
+                                                <div class="row">
+                                                    <div class="col-md-auto">
+                                                        <a class="thumbnail" href="#"><img alt=""
+                                                                                           src="{{asset('storage/')}}"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+                                        <a data-slide="next" href="#media" class="right carousel-control">›</a>
+                                    </div>
                                 </td>
                                 <td><a href="{{route('admin.posts.edit', $post->id)}}" class="fa fa-pencil"></a>
                                     <form method="POST" action="{{route('admin.posts.delete', $post->id)}}">

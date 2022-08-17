@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             PostTagSeeder::class,
             CommentSeeder::class,
-            SubscriptionSeeder::class
+            SubscriptionSeeder::class,
+            ArtistSeeder::class,
         ]);
     }
 }

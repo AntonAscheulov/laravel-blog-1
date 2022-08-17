@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ExhibitionController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\Admin\ArtistController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,8 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/post/{slug}', [HomeController::class, 'show'])->name('post.show');
 Route::get('/tag/{slug}', [HomeController::class, 'tag'])->name('tag.show');
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.show');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/artists', [HomeController::class, 'artists'])->name('artists');
 
 Route::group(['middleware' => 'guest'], function (){
     Route::get('/register', [AuthController::class, 'registerForm'])->name('registerForm');
@@ -88,5 +91,25 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         'store' => 'admin.posts.store',
         'update' => 'admin.posts.update',
         'destroy' => 'admin.posts.delete'
+    ]);
+
+    Route::resource("exhibitions", ExhibitionController::class)->names([
+        'edit' => 'admin.exhibitions.edit',
+        'create' => 'admin.exhibitions.create',
+        'show' => 'admin.exhibitions.show',
+        'index' => 'admin.exhibitions.index',
+        'store' => 'admin.exhibitions.store',
+        'update' => 'admin.exhibitions.update',
+        'destroy' => 'admin.exhibitions.delete'
+    ]);
+
+    Route::resource("artists", ArtistController::class)->names([
+        'edit' => 'admin.artists.edit',
+        'create' => 'admin.artists.create',
+        'show' => 'admin.artists.show',
+        'index' => 'admin.artists.index',
+        'store' => 'admin.artists.store',
+        'update' => 'admin.artists.update',
+        'destroy' => 'admin.artists.delete'
     ]);
 });

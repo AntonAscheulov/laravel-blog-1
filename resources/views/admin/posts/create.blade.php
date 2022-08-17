@@ -1,23 +1,24 @@
 @extends('admin.layout')
 
 @section('content')
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Добавить статью
+                Добавить портфолио
             </h1>
         </section>
 
         <!-- Main content -->
         <section class="content">
             <form action="{{route('admin.posts.store')}}" enctype="multipart/form-data" method="POST">
-            @csrf
-            <!-- Default box -->
+                @csrf
+                <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Добавляем статью</h3>
+                        <h3 class="box-title">Добавляем портфолио</h3>
                         @include('admin.errors')
                     </div>
                     <div class="box-body">
@@ -27,24 +28,31 @@
                                 <input type="text" name="title" value="{{old('title')}}" class="form-control"
                                        id="exampleInputEmail1" placeholder="">
                             </div>
-
                             <div class="form-group">
-                                <label for="exampleInputFile">Лицевая картинка</label>
+                                <label>Автор</label>
+                                <select name="artist_id" class="form-control select2" style="width: 100%;"
+                                        data-placeholder="Выберите автора">
+                                    @foreach($artists as $id => $value)
+                                        <option value="{{$id}}">{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Обложка</label>
                                 <input type="file" name="image" id="exampleInputFile">
-
-                                <p class="help-block">Какое-нибудь уведомление о форматах..</p>
                             </div>
                             <div class="form-group">
-                                <label>Категория</label>
+                                <label for="exampleInputFile">Фотографии</label>
+                                <input type="file" name="photos[]"  accept="image/*" multiple>
+                            </div>
 
+                            <div class="form-group">
+                                <label>Категория</label>
                                 <select name="category_id" class="form-control select2" style="width: 100%;"
                                         data-placeholder="Выберите категорию">
                                     @foreach($categories as $id => $value)
                                         <option value="{{$id}}">{{$value}}</option>
                                     @endforeach
                                 </select>
-
-
                             </div>
                             <div class="form-group">
                                 <label>Теги</label>
@@ -55,8 +63,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
-
                             <!-- checkbox -->
                             <div class="form-group">
                                 <label>
@@ -91,6 +97,7 @@
                                           name="content"></textarea>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">

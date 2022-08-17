@@ -36,6 +36,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
+    }
+
     public function tags()
     {
         return $this->belongsToMany(
@@ -44,6 +49,10 @@ class Post extends Model
             'post_id',
             'tag_id'
         );
+    }
+
+    public function photos(){
+        return $this->hasMany(Photo::class);
     }
 
     public function sluggable(): array
@@ -137,6 +146,18 @@ class Post extends Model
         }
     }
 
+    public function getPhotosAttribute($value)
+    {
+        {
+            if ($value !== null) {
+                return $value;
+            }
+
+            return self::NO_IMAGE;
+    }
+    }
+
+
     /* public function setDateAttribute($value)
      {
         $date = Carbon::createFromFormat('d/m/y', $value)->format('Y-m-d');
@@ -158,6 +179,23 @@ class Post extends Model
             return;
         }
         $this->tags()->sync($ids);
+    }
+
+    public function setArtist($id)
+    {
+        if ($id == null) {
+            return;
+        }
+        $this->artist_id = $id;
+        $this->save();
+    }
+
+    public function getArtistName()
+    {
+        if ($this->artist !== null) {
+            return $this->artist->artist_name;
+        }
+        return 'Без автора';
     }
 
     public function getCategoryTitle()
@@ -202,6 +240,7 @@ class Post extends Model
     {
         return self::all()->except($this->id);
     }
+
 }
 
 

@@ -1,52 +1,62 @@
 @extends('layout')
 
 @section('content')
-    <div class="main-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    @foreach($posts as $post)
-                    <article class="post">
-                        <div class="post-thumb">
-                            <a href="{{route('post.show', $post->slug)}}"><img src="{{asset('storage/'.$post->image)}}" alt=""></a>
-
-                            <a href="{{route('post.show', $post->slug)}}" class="post-thumb-overlay text-center">
-                                <div class="text-uppercase text-center">View Post</div>
-                            </a>
-                        </div>
-                        <div class="post-content">
-                            <header class="entry-header text-center text-uppercase">
-                                @if($post->category)
-                                <h6><a href="{{route('category.show', $post->category->slug)}}"> {{$post->getCategoryTitle()}}</a></h6>
-                                @else
-                                    <h6 class="text-info">{{$post->getCategoryTitle()}}</h6>
-                                @endif
-                                <h1 class="entry-title"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h1>
-                            </header>
-                            <div class="entry-content">
-                                <p>{{$post->description}}</p>
-
-                                <div class="btn-continue-reading text-center text-uppercase">
-                                    <a href="{{route('post.show', $post->slug)}}" class="more-link">Continue Reading</a>
-                                </div>
-                            </div>
-                            <div class="social-share">
-                                <span class="social-share-title pull-left text-capitalize">By <a href="#">Rubel</a></span>
-                                <ul class="text-center pull-right">
-                                    <li><a class="s-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a class="s-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a class="s-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a class="s-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li><a class="s-instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </article>
-                    @endforeach
-                    {{$posts->links()}}
+    <!-- Hero section -->
+    <section class="hero-section">
+        <div class="hero-slider owl-carousel">
+            @foreach($exhibitions as $exhibition)
+            <div class="hs-item">
+                <div class="hs-bg set-bg sm-overlay" data-setbg="{{asset('storage/'.$exhibition->image)}}"></div>
+                <div class="sp-container">
+                    <div class="hs-text">
+                        <h2>The Look<br>Gallery</h2>
+                        <p>{{$exhibition-> title}}<br>{{$exhibition-> date_start}} - {{$exhibition-> date_end}}</p>
+                        <a href="#" class="site-btn sb-big">Read More <img src="images/icons/arrow-right-black.png"
+                                                                           alt=""></a>
+                    </div>
                 </div>
-                @include('pages._sidebar')
+            </div>
+            @endforeach
+        </div>
+    </section>
+    <!-- Hero section end -->
+
+    <!-- Gallery section -->
+    <section class="gallery-section">
+        <div class="sp-container">
+            <div class="row">
+                <div class="gallery-text">
+                    <h2>“The camera makes you forget you’re there. It’s not like you are hiding but you forget, you
+                        are just looking so much.”</h2>
+                    <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
+                        pretium, vitae ornare leo sollicitudin. Aenean quis velit pulvinar, pellentesque neque vel,
+                        laoreet orci. Suspendisse potenti. </p>
+                </div>
+                @foreach($posts as $post)
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <h4><a href="{{route('post.show', $post->slug)}}"><img
+                                src="{{asset('storage/'.$post->image)}}" alt=""></a></h4>
+                        <h4><a
+                                href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h4>
+                        <p>Artist: John Doe</p>
+                        @if($post->category)
+                            <h6>
+                                <a href="{{route('category.show', $post->category->slug)}}"> {{$post->getCategoryTitle()}}</a>
+                            </h6>
+                        @else
+                            <h6>{{$post->getCategoryTitle()}}</h6>
+                        @endif
+                        <br>
+                        <a href="{{route('post.show', $post->slug)}}" class="site-btn">view portfolio <img src="images/icons/arrow-right-black.png"
+                                                                         alt=""></a>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
-    </div>
+        <button type="button" class="btn btn-dark btn-lg btn-block text-uppercase">see all portfolios</button>
+        <br>
+    </section>
+    <!-- Gallery section end -->
 @endsection

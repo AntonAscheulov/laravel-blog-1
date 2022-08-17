@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
 use App\Models\Category;
+use App\Models\Exhibition;
 use App\Models\Tag;
 use App\Services\Weather\Interfaces\WeatherServiceContract;
 use Illuminate\Http\Request;
@@ -17,11 +19,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(3);
-
-        return view('pages.index', ['posts' => $posts]);
+        $posts = Post::paginate(6);
+        $exhibitions = Exhibition::all();
+        return view('pages.index', ['posts' => $posts], ['exhibitions' => $exhibitions]);
     }
 
+    public function contact()
+    {
+        return view('pages.contact');
+    }
+
+    public function artists(){
+
+        $atrists = Artist::Paginate(6);
+        return view('pages.artists', ['artists' => $atrists]);
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -1,51 +1,41 @@
 @extends('layout')
 
 @section('content')
-    <div class="main-content">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-
-                    <div class="leave-comment mr0"><!--leave comment-->
-                        @include('admin.errors')
-                        <h3 class="text-uppercase">My profile</h3>
-                        <br>
-                        <img src="{{asset('storage/'.$user->avatar)}}" alt="" class="profile-image">
-                        <form class="form-horizontal contact-form" role="form" method="post" action="{{route('profileUpdate')}}"
-                              enctype="multipart/form-data">
-                            @csrf
-                            @method("PUT")
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="name" name="name"
-                                           placeholder="Name" value="{{$user->name}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="email" class="form-control" id="email" name="email"
-                                           placeholder="Email" value="{{$user->email}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="password" class="form-control" id="password" name="password"
-                                           placeholder="password">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="file" class="form-control" id="image" name="avatar">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn send-btn">Update</button>
-
-                        </form>
-                    </div><!--end leave comment-->
-                </div>
-                @include('pages._sidebar')
+            <div class="page-title">
+                <h2>My profile</h2>
             </div>
+            @include('admin.errors')
+            <div class="artists-item">
+            <img src="{{asset('storage/'.$user->avatar)}}" alt=" ">
+            </div>
+            <form role="form" method="post" action="{{route('profileUpdate')}}" enctype="multipart/form-data">
+                @csrf
+                @method("PUT")
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                           value="{{$user->name}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                           placeholder="Enter email" value="{{$user->email}}">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">About myself</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="image" name="avatar">
+                    <label class="custom-file-label" for="customFile">Change avatar</label>
+                </div>
+                <hr class="">
+                <button type="submit" class="btn btn-dark btn-lg btn-block">Update</button>
+            </form>
+            <br>
         </div>
-    </div>
 @endsection
