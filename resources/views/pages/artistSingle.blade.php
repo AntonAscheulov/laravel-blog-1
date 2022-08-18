@@ -16,7 +16,7 @@
         </div>
     </div>
         <br>
-        <h2 class="text-uppercase">{{$artist->artist_name}} all Portfolios</h2>
+        <h2 class="text-uppercase">{{$artist->artist_name}} Portfolios</h2>
         <div class="row">
             @foreach($posts as $post)
                 <div class="col-md-4">

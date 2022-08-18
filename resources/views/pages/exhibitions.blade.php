@@ -11,10 +11,12 @@
             <div class="row artists-row">
                 @foreach($exhibitions as $exhibition)
                     <div class="col-lg-4 col-sm-6 artists-col">
-                        <div class="artists-item">
-                            <img src="{{asset('storage/'.$exhibition->image)}}" alt="">
-                            <h4>{{$exhibition->title}}</h4>
-                            <span>By {{$exhibition->getArtistName()}}</span>
+                        <div class="gallery-item">
+                            <a href="{{route('exhibitionSingle', $exhibition->id)}}"><img
+                                    src="{{asset('storage/'.$exhibition->image)}}" alt=""></a>
+                            <h4><a
+                                    href="{{route('exhibitionSingle', $exhibition->id)}}">{{$exhibition->title}}</a></h4>
+                            <span>Artist: <a href="{{route('artistSingle', $exhibition->artist->id)}}">{{$exhibition->getArtistName()}}</a></span>
                             <p>{{date('d-m-Y', strtotime($exhibition->date_start))}} - {{date('d-m-Y', strtotime($exhibition->date_end))}}</p>
                         </div>
                     </div>

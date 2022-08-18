@@ -9,18 +9,19 @@ use App\Models\Tag;
 use App\Services\Weather\Interfaces\WeatherServiceContract;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
         $posts = Post::paginate(3);
-        $exhibitions = Exhibition::all();
+        $exhibitions = Exhibition::whereDate('date_end', '>', Carbon::now()->today())->get();
         return view('pages.index', ['posts' => $posts], ['exhibitions' => $exhibitions]);
     }
 
@@ -36,7 +37,7 @@ class HomeController extends Controller
     }
 
     public function exhibitions(){
-        $exhibitions = Exhibition::Paginate (6);
+        $exhibitions = Exhibition::Paginate (3);
         return view('pages.exhibitions', ['exhibitions' => $exhibitions]);
     }
 
@@ -81,11 +82,15 @@ class HomeController extends Controller
 
     public function artistSingle($id){
         $artist = Artist::where('id', $id)->firstOrFail();
-        $posts = $artist->posts()->paginate(3);
+        $posts = $artist->posts()->get();
         return view('pages.artistSingle', ['artist' => $artist], ['posts' => $posts]);
     }
 
-
+    public function exhibitionSingle($id){
+        $exhibition = Exhibition::where('id', $id)->firstOrFail();
+        $exhibitionsFuture = Exhibition::whereDate('date_start', '>', Carbon::now()->today())->get();
+        return view('pages.exhibitionSingle', ['exhibition' => $exhibition], ['exhibitionsFuture' => $exhibitionsFuture]);
+    }
 
 
     public function tag($slug)

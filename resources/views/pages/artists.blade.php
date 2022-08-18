@@ -11,9 +11,11 @@
             <div class="row artists-row">
                 @foreach($artists as $artist)
                     <div class="col-lg-4 col-sm-6 artists-col">
-                        <div class="artists-item">
-                            <img src="{{asset('storage/'.$artist->artist_avatar)}}" alt="">
-                            <h4>{{$artist->artist_name}}</h4>
+                        <div class="gallery-item">
+                            <a href="{{route('artistSingle', $artist->id)}}"><img
+                                    src="{{asset('storage/'.$artist->artist_avatar)}}" alt=""></a>
+                            <h4><a href="{{route('artistSingle', $artist->id)}}">{{$artist->artist_name}}</a>
+                            </h4>
                             <span>{{$artist->artist_profession}}</span>
                             <p>{{$artist->artist_short_description}}</p>
                         </div>

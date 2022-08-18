@@ -31,6 +31,7 @@ Route::get('/post/{slug}', [HomeController::class, 'show'])->name('post.show');
 Route::get('/tag/{slug}', [HomeController::class, 'tag'])->name('tag.show');
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.show');
 Route::get('/artist/{id}', [HomeController::class, 'artistSingle'])->name('artistSingle');
+Route::get('/exhibition/{id}', [HomeController::class, 'exhibitionSingle'])->name('exhibitionSingle');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/artists', [HomeController::class, 'artists'])->name('artists');
 Route::get('/exhibitions', [HomeController::class, 'exhibitions'])->name('exhibitions');

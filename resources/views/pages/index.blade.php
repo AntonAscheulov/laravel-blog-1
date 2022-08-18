@@ -12,7 +12,7 @@
                             <h2>The Look<br>Gallery</h2>
                             <p>{{$exhibition-> title}}<br>{{date('d-m-Y', strtotime($exhibition->date_start))}}
                                 - {{date('d-m-Y', strtotime($exhibition->date_end))}}</p>
-                            <a href="#" class="site-btn sb-big">Read More <img src="/images/icons/arrow-right-black.png"
+                            <a href="{{route('exhibitionSingle', $exhibition->id)}}" class="site-btn sb-big">Read More <img src="/images/icons/arrow-right-black.png"
                                                                                alt=""></a>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="col-md-6">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
-                                <div class="card p-4">
+                                <div class="">
                                     <div class="d-flex">
                                         <h4 class="flex-grow-1">{{WeatherFacade::coordinates()->getCityName()}}</h4>
                                     </div>
@@ -75,6 +75,7 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 @foreach($posts as $post)
                     <div class="col-md-4">
                         <div class="gallery-item">

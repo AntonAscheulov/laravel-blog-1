@@ -16,7 +16,7 @@
                                     src="{{asset('storage/'.$post->image)}}" alt=""></a></h4>
                         <h4><a
                                 href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h4>
-                        <p>Artist: John Doe</p>
+                        <p>Artist: <a href="{{route('artistSingle', $post->artist->id)}}">{{$post->getArtistName()}}</a></p>
                         @if($post->category)
                             <h6>
                                 <a href="{{route('category.show', $post->category->slug)}}"> {{$post->getCategoryTitle()}}</a>
