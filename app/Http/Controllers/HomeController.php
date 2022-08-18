@@ -96,7 +96,8 @@ class HomeController extends Controller
     {
         $artist = Artist::where('id', $id)->firstOrFail();
         $posts = $artist->posts()->get();
-        return view('pages.artistSingle', ['artist' => $artist], ['posts' => $posts]);
+        $exhibitions = $artist->exhibitions()->get();
+        return view('pages.artistSingle', ['artist' => $artist], ['posts' => $posts, 'exhibitions' => $exhibitions]);
     }
 
     public function exhibitionSingle($id)

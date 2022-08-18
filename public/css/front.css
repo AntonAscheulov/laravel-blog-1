@@ -4191,11 +4191,11 @@ Gallery section
 }
 
 .gallery-item a {
-    color: #081624;
+    color: #17a2b8;
 }
 
 .gallery-item a:hover {
-    color: #17a2b8;
+    color: #081624;
 }
 
 .gallery-item .site-btn {
