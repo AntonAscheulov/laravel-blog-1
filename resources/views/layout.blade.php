@@ -30,7 +30,7 @@
         </a>
         <ul class="main-menu">
             <li><a href="{{route('index')}}">Home</a></li>
-            <li><a href="gallery.html">About</a></li>
+            <li><a href="{{route('about')}}">About</a></li>
             <li><a href="{{route('artists')}}">Artists</a></li>
             <li><a href="{{route('exhibitions')}}">Exhibitions</a></li>
             <li><a href="{{route('portfolios')}}">Portfolios</a></li>

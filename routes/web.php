@@ -36,6 +36,7 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/artists', [HomeController::class, 'artists'])->name('artists');
 Route::get('/exhibitions', [HomeController::class, 'exhibitions'])->name('exhibitions');
 Route::get('/portfolios', [HomeController::class, 'portfolios'])->name('portfolios');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 Route::group(['middleware' => 'guest'], function (){
     Route::get('/register', [AuthController::class, 'registerForm'])->name('registerForm');

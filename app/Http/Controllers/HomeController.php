@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::paginate(3);
-        $exhibitions = Exhibition::whereDate('date_end', '>', Carbon::now()->today())->get();
+        $exhibitions = Exhibition::whereDate('date_end', '>=', Carbon::now()->today())->whereDate('date_start', '<=', Carbon::now()->today())->get();
         return view('pages.index', ['posts' => $posts], ['exhibitions' => $exhibitions]);
     }
 
@@ -30,22 +30,34 @@ class HomeController extends Controller
         return view('pages.contact');
     }
 
-    public function artists(){
+    public function artists()
+    {
 
         $atrists = Artist::Paginate(6);
         return view('pages.artists', ['artists' => $atrists]);
     }
 
-    public function exhibitions(){
-        $exhibitions = Exhibition::Paginate (3);
+    public function exhibitions()
+    {
+        $exhibitions = Exhibition::Paginate(3);
         return view('pages.exhibitions', ['exhibitions' => $exhibitions]);
     }
 
-    public function portfolios(){
+    public function portfolios()
+    {
         $posts = Post::paginate(6);
         return view('pages.portfolios', ['posts' => $posts]);
     }
 
+
+    public function about()
+    {
+        $exhibitionNow = Exhibition::whereDate('date_end', '>=', Carbon::now()->today())->whereDate('date_start', '<=', Carbon::now()->today())->inRandomOrder()->first();
+        $exhibitionFuture = Exhibition::whereDate('date_start', '>', Carbon::now()->today())->inRandomOrder()->first();
+        $exhibitionsPast = Exhibition::whereDate('date_end', '<', Carbon::now()->today())->get();
+        return view('pages.about', ['exhibitionNow' => $exhibitionNow,
+            'exhibitionFuture'=>$exhibitionFuture], ['exhibitionsPast' => $exhibitionsPast]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -80,13 +92,15 @@ class HomeController extends Controller
         return view('pages.show', ['post' => $post]);
     }
 
-    public function artistSingle($id){
+    public function artistSingle($id)
+    {
         $artist = Artist::where('id', $id)->firstOrFail();
         $posts = $artist->posts()->get();
         return view('pages.artistSingle', ['artist' => $artist], ['posts' => $posts]);
     }
 
-    public function exhibitionSingle($id){
+    public function exhibitionSingle($id)
+    {
         $exhibition = Exhibition::where('id', $id)->firstOrFail();
         $exhibitionsFuture = Exhibition::whereDate('date_start', '>', Carbon::now()->today())->get();
         return view('pages.exhibitionSingle', ['exhibition' => $exhibition], ['exhibitionsFuture' => $exhibitionsFuture]);
