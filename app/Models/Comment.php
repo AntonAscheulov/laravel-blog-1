@@ -11,32 +11,32 @@ class Comment extends Model
 
     public function post()
     {
-        return $this->hasOne(Post::class);
+        return $this->belongsTo(Post::class);
     }
 
     public function author()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function published()
     {
-        $this->is_publish = 1;
+        $this->is_published = 1;
         $this->save();
     }
 
     public function unpublished()
     {
-        $this->is_publish = 0;
+        $this->is_published = 0;
         $this->save();
     }
 
-    public function togglePublished($value)
+    public function togglePublished()
     {
-        if ($value == null) {
-            return $this->unpublished();
+        if ($this->is_published == 0) {
+            return $this->published();
         }
-        return $this->published();
+        return $this->unpublished();
     }
 
     public function scopePublished($query)

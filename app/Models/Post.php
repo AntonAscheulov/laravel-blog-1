@@ -41,6 +41,11 @@ class Post extends Model
         return $this->belongsTo(Artist::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function tags()
     {
         return $this->belongsToMany(
@@ -239,6 +244,10 @@ class Post extends Model
     public function related()
     {
         return self::all()->except($this->id);
+    }
+
+    public function getComments(){
+        return $this->comments()->where('is_published', 1)->get();
     }
 
 }

@@ -52,91 +52,41 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    @if(\Illuminate\Support\Facades\Auth::check())
-    <div class="sp-container">
-        <h2 class="featurette-heading">Leave a comment</h2>
-        <br>
-        <form role="form" method="post" action="#">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-                </div>
-                <div class="form-group col-md-6">
-                    <input type="email" class="form-control" id="email" name="email"
-                           placeholder="Email">
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" d="subject" name="subject"
-                       placeholder="Website url">
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" name="message"
-                          placeholder="Write Massage" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-dark btn-lg btn-block">Post comment</button>
-        </form>
-    </div>
-    @endif
-
-
-                    <div class="bottom-comment"><!--bottom comment-->
-                        <h4>3 comments</h4>
-
-                        <div class="comment-img">
-                            <img class="img-circle" src="/images/comment-img.jpg" alt="">
-                        </div>
-
-                        <div class="comment-text">
-                            <a href="#" class="replay btn pull-right"> Replay</a>
-                            <h5>Rubel Miah</h5>
-
-                            <p class="comment-date">
-                                December, 02, 2015 at 5:57 PM
-                            </p>
-
-
-                            <p class="para">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy
-                                eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                                voluptua. At vero eos et cusam et justo duo dolores et ea rebum.</p>
-                        </div>
-                    </div>
-                    <!-- end bottom comment-->
-
-
-                    <div class="leave-comment"><!--leave comment-->
-                        <h4>Leave a reply</h4>
-
-
-                        <form class="form-horizontal contact-form" role="form" method="post" action="#">
-                            <div class="form-group">
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control" id="email" name="email"
-                                           placeholder="Email">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="subject" name="subject"
-                                           placeholder="Website url">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-										<textarea class="form-control" rows="6" name="message"
-                                                  placeholder="Write Massage"></textarea>
-                                </div>
-                            </div>
-                            <a href="#" class="btn send-btn">Post Comment</a>
-                        </form>
-                    </div><!--end leave comment-->
-                </div>
+    @if (!$post->comments->isEmpty())
+        <h2 class="featurette-heading ml-4 py-2">Comments</h2>
+        @foreach($post->getComments() as $comment)
+    <div class="sp-container mt-2 py-2">
+        <div class="media">
+            <img src="{{asset('storage/'.$comment->author->avatar)}}" class="rounded-circle align-self-start mr-3" alt="..." width="75" height="75">
+            <div class="media-body">
+                <h3 class="mt-0">{{$comment->author->name}}</h3>
+                <p class="comment-date">
+                    {{$comment->created_at->diffForHumans()}}
+                </p>
+                <p class="para">{{$comment->text}}</p>
             </div>
         </div>
     </div>
+        @endforeach
+    @endif
+    @if(\Illuminate\Support\Facades\Auth::check())
+        <div class="sp-container">
+            <h2 class="featurette-heading">Leave a comment</h2>
+            @if(session('status'))
+                <div class="alert alert-success">
+                    {{session('status')}}
+                </div>
+            @endif
+            <br>
+            <form role="form" method="post" action="{{route('comment')}}" class="pb-5">
+                @csrf
+                <input type="hidden" name="post_id" value="{{$post->id}}">
+                <div class="form-group">
+                <textarea class="form-control" name="comment"
+                          placeholder="Write Comment" rows="6"></textarea>
+                </div>
+                <button type="submit" class="btn btn-dark btn-lg btn-block">Commit</button>
+            </form>
+        </div>
+    @endif
 @endsection
