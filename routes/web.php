@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/comments', [CommentController::class, 'index'])->name('admin.comments');
     Route::get('/comments/toggle/{id}', [CommentController::class, 'toggle'])->name('admin.commentsToggle');
-
+    Route::delete('/comments/{id}/destroy', [CommentController::class, 'destroy'])->name('admin.commentsDelete');
 
     Route::resource("categories", CategoryController::class)->parameters([
         'categories' => "category:slug"

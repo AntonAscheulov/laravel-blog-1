@@ -6,8 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Blank page
-                <small>it all starts here</small>
+                Комментарии
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -22,13 +21,10 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Листинг сущности</h3>
+                    <h3 class="box-title">Все комментарии</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <div class="form-group">
-                        <a href="create.html" class="btn btn-success">Добавить</a>
-                    </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -48,7 +44,13 @@
                             @else
                                     <a href="{{route('admin.commentsToggle', $comment->id)}}" class="fa fa-thumbs-o-up"></a>
                             @endif
-                                <a href="#" class="fa fa-remove"></a></td>
+                                <form method="POST" action="{{route('admin.commentsDelete', $comment->id)}}">
+                                    @csrf
+                                    @method("DELETE")
+                                    <button onclick="return confirm('Are you sure?')" type="submit" class="delete">
+                                        <a class="fa fa-remove"></a>
+                                    </button>
+                                </form>
                         </tr>
                         @endforeach
                         </tfoot>
