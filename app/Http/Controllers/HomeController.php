@@ -157,4 +157,8 @@ class HomeController extends Controller
     {
         //
     }
+
+    public function test(){
+        return view('mails.newUser');
+    }
 }

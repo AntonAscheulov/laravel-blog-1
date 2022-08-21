@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Artist;
+use App\Models\Contact;
 use App\Models\Exhibition;
 use App\Models\Post;
 use App\Observers\ArtistObserver;
+use App\Observers\ContactObserver;
 use App\Observers\ExhibitionObserver;
 use App\Observers\PostObserver;
 use Illuminate\Auth\Events\Registered;
@@ -22,6 +24,7 @@ class EventServiceProvider extends ServiceProvider
         Post::class => [PostObserver::class],
         Exhibition::class => [ExhibitionObserver::class],
         Artist::class => [ArtistObserver::class],
+        Contact::class => [ContactObserver::class],
     ];
 
     /**

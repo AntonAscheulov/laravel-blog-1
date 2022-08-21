@@ -6,15 +6,15 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConactController;
 use App\Http\Controllers\ProfileController;
-use App\Models\User;
-use App\Notifications\SingUpNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ArtistController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,19 +38,21 @@ Route::get('/artists', [HomeController::class, 'artists'])->name('artists');
 Route::get('/exhibitions', [HomeController::class, 'exhibitions'])->name('exhibitions');
 Route::get('/portfolios', [HomeController::class, 'portfolios'])->name('portfolios');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/test', [HomeController::class, 'test'])->name('test');
+Route::post('/contact-form', [ConactController::class, 'store'])->name('storeContactForm');
 
-Route::group(['middleware' => 'guest'], function (){
+Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'registerForm'])->name('registerForm');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::get('/login', [AuthController::class, 'loginForm'])->name('loginForm');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::group(['middleware' => 'auth'], function (){
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/profile',[ProfileController::class, 'index'])->name('profile');
-    Route::put('/profile',[ProfileController::class, 'update'])->name('profileUpdate');
-    Route::post('/comment',[CommentController::class, 'store'])->name('comment');;
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profileUpdate');
+    Route::post('/comment', [CommentController::class, 'store'])->name('comment');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
