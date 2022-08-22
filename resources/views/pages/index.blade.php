@@ -92,6 +92,8 @@
                                 <h6>{{$post->getCategoryTitle()}}</h6>
                             @endif
                             <br>
+                            <p>{{$post->description}}</p>
+                            <br>
                             <a href="{{route('post.show', $post->slug)}}" class="site-btn">view portfolio <img
                                     src="/images/icons/arrow-right-black.png"
                                     alt=""></a>
