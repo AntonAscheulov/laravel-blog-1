@@ -17,7 +17,7 @@ class TagController extends Controller
 {
     public function index(IndexTagRequest $request)
     {
-        $tags = Tag::paginate(2);
+        $tags = Tag::paginate(10);
 
         return view('admin.tags.index', ['tags' => $tags]);
     }

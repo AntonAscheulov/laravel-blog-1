@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StorePostRequest extends FormRequest
 {
@@ -30,10 +31,10 @@ class StorePostRequest extends FormRequest
             'category_id' => 'required|exists:categories,id',
             'artist_id' => 'required|exists:artists,id',
             'image' => 'required|image',
-            'photos[]' => 'image',
+            'photos' => 'required|array',
             'tags' => 'required|array',
             'tags.*' => 'required|exists:tags,id',
-            'user_id' => 'required|nullable',
+            'user_id' => 'required',
             'is_published' => 'required|nullable',
             'is_recommended' => 'required|nullable',
         ];
@@ -43,7 +44,7 @@ class StorePostRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->merge([
-            'user_id' => $this->user()->id,
+            'user_id' => Auth::user()->id,
             'is_published' => $this->exists('is_published') ? true : false,
             'is_recommended' => $this->exists('is_recommended') ? true : false,
         ]);

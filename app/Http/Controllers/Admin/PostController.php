@@ -15,16 +15,17 @@ use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    public function index(IndexPostRequest $request)
+    public function index(IndexPostRequest $id)
     {
+
         $posts = Post::paginate(10);
 
         return view('admin.posts.index', ['posts' => $posts]);
     }
-
 
 
     public function create(CreatePostRequest $request)
@@ -43,14 +44,14 @@ class PostController extends Controller
         $post->setTags($request->get('tags'));
 
 
-        if ($request->has('photos')){
-            foreach ($request->file('photos')as $photo){
-            $imageName = $post['title'].'-photo'.time().rand(1,1000).'.'.$photo->extension();
-            $photo->move(public_path('uploads'),$imageName);
-            Photo::create([
-                'post_id' => $post->id,
-                'photos' => $imageName
-            ]);
+        if ($request->has('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $imageName = 'uploads/' . 'photo' . time() . rand(1, 1000) . '.' . $photo->extension();
+                $photo->move(public_path('storage/uploads'), $imageName);
+                Photo::create([
+                    'post_id' => $post->id,
+                    'photo' => $imageName
+                ]);
             }
         }
 
@@ -68,8 +69,9 @@ class PostController extends Controller
         $tags = Tag::pluck('title', 'id')->all();
         $artists = Artist::pluck('artist_name', 'id')->all();
         $selectedTags = $post->tags->pluck('id')->all();
+        $photos = $post->photos()->get();
         return view('admin.posts.edit', ['post' => $post, 'categories' => $categories, 'artists' => $artists, 'tags' => $tags,
-            'selectedTags' => $selectedTags]);
+            'selectedTags' => $selectedTags, 'photos' => $photos]);
     }
 
     public function update(UpdatePostRequest $request, Post $post)
@@ -79,14 +81,14 @@ class PostController extends Controller
         $post->setArtist($request->get('artist_id'));
         $post->setTags($request->get('tags'));
 
-        if ($request->has('photos')){
-            foreach ($request->file('photos')as $photos){
-                $imagePath = 'uploads/';
-                $imageName = $imagePath.$post['title'].'-photo'.time().rand(1,1000).'.'.$photos->extension();
-                $photos->move(public_path('uploads'),$imageName);
+
+        if ($request->has('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $imageName = 'uploads/' . 'photo' . time() . rand(1, 1000) . '.' . $photo->extension();
+                $photo->move(public_path('storage/uploads'), $imageName);
                 Photo::create([
                     'post_id' => $post->id,
-                    'photos' => $imageName
+                    'photo' => $imageName
                 ]);
             }
         }
@@ -98,5 +100,16 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('admin.posts.index');
+    }
+
+    public function deletePhoto($id)
+    {
+        $photos = Photo::findOrFail($id);
+            if (Storage::exists($photos->photo)){
+                Storage::delete($photos->photo);
+            }
+
+        Photo::findOrFail($id)->delete();
+        return back();
     }
 }

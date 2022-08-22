@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(3);
+        $posts = Post::inRandomOrder()->paginate(3);
         $exhibitions = Exhibition::whereDate('date_end', '>=', Carbon::now()->today())->whereDate('date_start', '<=', Carbon::now()->today())->get();
         return view('pages.index', ['posts' => $posts], ['exhibitions' => $exhibitions]);
     }
@@ -84,12 +84,13 @@ class HomeController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
-        return view('pages.show', ['post' => $post]);
+        $photos = $post->photos()->get();
+        return view('pages.show', ['post' => $post], ['photos' => $photos]);
     }
 
     public function artistSingle($id)
@@ -158,7 +159,4 @@ class HomeController extends Controller
         //
     }
 
-    public function test(){
-        return view('mails.newUser');
-    }
 }

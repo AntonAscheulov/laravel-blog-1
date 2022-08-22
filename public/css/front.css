@@ -4177,6 +4177,8 @@ Gallery section
 }
 
 .gallery-item img {
+    max-width: 100%;
+    height: 500px;
     margin-bottom: 20px;
 }
 
@@ -4207,6 +4209,7 @@ Gallery section
 
 .gallery-item .site-btn img {
     width: 28px;
+    height: 100%;
     margin-top: 7px;
 }
 

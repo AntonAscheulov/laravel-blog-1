@@ -22,6 +22,7 @@
                 <img src="{{asset('storage/'.$post->image)}}" alt="">
             </div>
         </div>
+        <br>
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group-lg" role="group" aria-label="First group">
                 @foreach($post->tags as $tag)
@@ -31,30 +32,19 @@
             </div>
         </div>
     </div>
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{asset('storage/'.$post->image)}}" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="{{asset('storage/'.$post->image)}}" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="{{asset('storage/'.$post->image)}}" class="d-block w-100" alt="...">
-            </div>
+    <section class="gallery-slider-section pt-lg-5">
+        <div class="gallery-slider owl-carousel">
+            @foreach($photos as $photo)
+                <div class="gallery-item">
+                    <a href="{{asset('storage/'.$photo->photo)}}"><img
+                            src="{{asset('storage/'.$photo->photo)}}" class="img-exhib" alt=""></a>
+                </div>
+            @endforeach
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
+    </section>
     @if (!$post->comments->isEmpty())
         <h2 class="featurette-heading ml-4 py-2">Comments</h2>
-        @foreach($post->getComments() as $comment)
+        @foreach($post->getComments() as $comment)э
     <div class="sp-container mt-2 py-2">
         <div class="media">
             <img src="{{asset('storage/'.$comment->author->avatar)}}" class="rounded-circle align-self-start mr-3" alt="..." width="75" height="75">

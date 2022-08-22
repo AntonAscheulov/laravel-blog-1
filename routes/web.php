@@ -38,7 +38,6 @@ Route::get('/artists', [HomeController::class, 'artists'])->name('artists');
 Route::get('/exhibitions', [HomeController::class, 'exhibitions'])->name('exhibitions');
 Route::get('/portfolios', [HomeController::class, 'portfolios'])->name('portfolios');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('/test', [HomeController::class, 'test'])->name('test');
 Route::post('/contact-form', [ConactController::class, 'store'])->name('storeContactForm');
 
 Route::group(['middleware' => 'guest'], function () {
@@ -60,6 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/comments', [CommentController::class, 'index'])->name('admin.comments');
     Route::get('/comments/toggle/{id}', [CommentController::class, 'toggle'])->name('admin.commentsToggle');
     Route::delete('/comments/{id}/destroy', [CommentController::class, 'destroy'])->name('admin.commentsDelete');
+    Route::delete('/deletePhoto/{id}', [PostController::class, 'deletePhoto'])->name('admin.deletePhoto');
 
     Route::resource("categories", CategoryController::class)->parameters([
         'categories' => "category:slug"

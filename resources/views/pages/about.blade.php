@@ -12,8 +12,10 @@
                         <a href="{{route('exhibitionSingle', $exhibitionNow->id)}}"><img
                                 src="{{asset('storage/'.$exhibitionNow->image)}}" alt=""></a>
                         <h4>Now @ The Look</h4>
-                        <p>Artist: <a href="{{route('artistSingle', $exhibitionNow->artist->id)}}">{{$exhibitionNow->getArtistName()}}</a></p>
-                        <a href="{{route('exhibitionSingle', $exhibitionNow->id)}}" class="site-btn">view gallery <img src="img/icons/arrow-right-black.png" alt=""></a>
+                        <h4><a
+                                href="{{route('exhibitionSingle', $exhibitionNow->id)}}">{{$exhibitionNow->title}}</a></h4>
+                        <p>Artist: <a href="{{route('artistSingle', $exhibitionNow->artist->id)}}">{{$exhibitionNow->getArtistName()}}</a><br>{{date('d-m-Y', strtotime($exhibitionNow->date_start))}}
+                            - {{date('d-m-Y', strtotime($exhibitionNow->date_end))}}</p>
                     </div>
                     <div class="info-numbers">
                         <h2 class="gallery-title">Numbers</h2>
@@ -48,10 +50,10 @@
                             <h3>Vincent Van Gogh</h3>
                         </div>
                     </div>
-                    <h2 class="gallery-title">Soon @ The Look</h2>
                     <div class="gallery-item">
                         <a href="{{route('exhibitionSingle', $exhibitionFuture->id)}}"><img
                                 src="{{asset('storage/'.$exhibitionFuture->image)}}" alt=""></a>
+                        <h4>Soon @ The Look</h4>
                         <h4><a
                                 href="{{route('exhibitionSingle', $exhibitionFuture->id)}}">{{$exhibitionFuture->title}}</a></h4>
                         <p>Artist: <a href="{{route('artistSingle', $exhibitionFuture->artist->id)}}">{{$exhibitionFuture->getArtistName()}}</a><br>{{date('d-m-Y', strtotime($exhibitionFuture->date_start))}}

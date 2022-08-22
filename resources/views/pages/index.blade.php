@@ -12,7 +12,7 @@
                             <h2>The Look<br>Gallery</h2>
                             <p>{{$exhibition-> title}}<br>{{date('d-m-Y', strtotime($exhibition->date_start))}}
                                 - {{date('d-m-Y', strtotime($exhibition->date_end))}}</p>
-                            <a href="{{route('exhibitionSingle', $exhibition->id)}}" class="site-btn sb-big">Read More <img src="/images/icons/arrow-right-black.png"
+                            <a href="{{route('exhibitionSingle', $exhibition->id)}}" class="site-btn sb-big">Read More <img src="images/icons/arrow-right-black.png"
                                                                                alt=""></a>
                         </div>
                     </div>

@@ -47,11 +47,11 @@
                 <div class="sp-container">
                     <h2 class="gallery-title">{{$artist->artist_name}} Exhibitions</h2>
                 </div>
-                <div class="col-md-4">
+                <div class="gallery-slider owl-carousel">
                     @foreach($exhibitions as $item)
                         <div class="gallery-item">
                             <a href="{{route('exhibitionSingle', $item->id)}}"><img
-                                    src="{{asset('storage/'.$item->image)}}" class="img-fluid" alt=""></a>
+                                    src="{{asset('storage/'.$item->image)}}" class="img-" alt=""></a>
                             <h4><a
                                     href="{{route('exhibitionSingle', $item->id)}}">{{$item->title}}</a></h4>
                             <p>Artist: <a

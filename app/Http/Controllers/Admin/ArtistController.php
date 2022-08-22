@@ -17,7 +17,7 @@ class ArtistController extends Controller
 {
     public function index(IndexArtistRequest $request)
     {
-        $artists = Artist::paginate(6);
+        $artists = Artist::paginate(10);
 
         return view('admin.artists.index', ['artists' => $artists]);
     }
