@@ -71,22 +71,22 @@ class Post extends Model
 
     public function published()
     {
-        $this->is_published = true;
+        $this->is_published = 1;
         $this->save();
     }
 
     public function unpublished()
     {
-        $this->is_published = false;
+        $this->is_published = 0;
         $this->save();
     }
 
-    public function togglePublished($value)
+    public function togglePublished()
     {
-        if ($value == null) {
-            return $this->unpublished();
+        if ($this->is_published == 0) {
+            return $this->published();
         }
-        return $this->published();
+        return $this->unpublished();
     }
 
     public function recommended()

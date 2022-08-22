@@ -44,7 +44,7 @@
     </section>
     @if (!$post->comments->isEmpty())
         <h2 class="featurette-heading ml-4 py-2">Comments</h2>
-        @foreach($post->getComments() as $comment)э
+        @foreach($post->getComments() as $comment)
     <div class="sp-container mt-2 py-2">
         <div class="media">
             <img src="{{asset('storage/'.$comment->author->avatar)}}" class="rounded-circle align-self-start mr-3" alt="..." width="75" height="75">

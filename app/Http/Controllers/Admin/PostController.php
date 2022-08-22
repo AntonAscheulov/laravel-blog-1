@@ -112,4 +112,13 @@ class PostController extends Controller
         Photo::findOrFail($id)->delete();
         return back();
     }
+
+    public function toggle($id){
+
+        $post = Post::find($id);
+        $post->togglePublished();
+
+        return redirect()->back();
+    }
+
 }

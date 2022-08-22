@@ -51,7 +51,13 @@
                                     <img src="{{asset('storage/'.$post->image)}}" alt="" class="img-responsive"
                                          width="150">
                                 </td>
-                                <td><a href="{{route('admin.posts.edit', $post->id)}}" class="fa fa-pencil"></a>
+                                <td>
+                                    @if($post->is_published == 1)
+                                        <a href="{{route('admin.posts.toggle', $post->id)}}" class="fa fa-lock"></a>
+                                    @else
+                                        <a href="{{route('admin.posts.toggle', $post->id)}}" class="fa fa-thumbs-o-up"></a>
+                                    @endif
+                                    <a href="{{route('admin.posts.edit', $post->id)}}" class="fa fa-pencil"></a>
                                     <form method="POST" action="{{route('admin.posts.delete', $post->id)}}">
                                         @csrf
                                         @method("DELETE")

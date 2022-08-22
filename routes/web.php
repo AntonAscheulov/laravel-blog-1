@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/comments', [CommentController::class, 'index'])->name('admin.comments');
     Route::get('/comments/toggle/{id}', [CommentController::class, 'toggle'])->name('admin.commentsToggle');
+    Route::get('/posts/toggle/{id}', [PostController::class, 'toggle'])->name('admin.posts.toggle');
     Route::delete('/comments/{id}/destroy', [CommentController::class, 'destroy'])->name('admin.commentsDelete');
     Route::delete('/deletePhoto/{id}', [PostController::class, 'deletePhoto'])->name('admin.deletePhoto');
 
@@ -102,7 +103,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         'index' => 'admin.posts.index',
         'store' => 'admin.posts.store',
         'update' => 'admin.posts.update',
-        'destroy' => 'admin.posts.delete'
+        'destroy' => 'admin.posts.delete',
     ]);
 
     Route::resource("exhibitions", ExhibitionController::class)->names([

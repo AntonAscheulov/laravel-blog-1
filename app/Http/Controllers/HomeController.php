@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::inRandomOrder()->paginate(3);
+        $posts = Post::where('is_published', '1')->inRandomOrder()->paginate(3);
         $exhibitions = Exhibition::whereDate('date_end', '>=', Carbon::now()->today())->whereDate('date_start', '<=', Carbon::now()->today())->get();
         return view('pages.index', ['posts' => $posts], ['exhibitions' => $exhibitions]);
     }
@@ -45,7 +45,7 @@ class HomeController extends Controller
 
     public function portfolios()
     {
-        $posts = Post::paginate(6);
+        $posts = Post::where('is_published', '1')->paginate(6);
         return view('pages.portfolios', ['posts' => $posts]);
     }
 
@@ -96,7 +96,7 @@ class HomeController extends Controller
     public function artistSingle($id)
     {
         $artist = Artist::where('id', $id)->firstOrFail();
-        $posts = $artist->posts()->get();
+        $posts = $artist->posts()->where('is_published', '1')->get();
         $exhibitions = $artist->exhibitions()->get();
         return view('pages.artistSingle', ['artist' => $artist], ['posts' => $posts, 'exhibitions' => $exhibitions]);
     }
@@ -112,7 +112,7 @@ class HomeController extends Controller
     public function tag($slug)
     {
         $tag = Tag::where('slug', $slug)->firstOrFail();
-        $posts = $tag->posts()->paginate(3);
+        $posts = $tag->posts()->where('is_published', '1')->paginate(3);
         return view('pages.list', ['posts' => $posts]);
 
     }
@@ -120,7 +120,7 @@ class HomeController extends Controller
     public function category($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $posts = $category->posts()->paginate(3);
+        $posts = $category->posts()->where('is_published', '1')->paginate(3);
         return view('pages.list', ['posts' => $posts]);
 
     }
