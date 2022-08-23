@@ -6,6 +6,9 @@
             <div class="page-title">
                 <h2>Artists</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis et augue non mollis. Sed
+                    sagittis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis et augue non mollis. Sed
+                    sagittis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis et augue non mollis. Sed
+                    sagittis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis et augue non mollis. Sed
                     sagittis.</p>
             </div>
             <div class="row artists-row">
