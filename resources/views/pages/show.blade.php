@@ -8,7 +8,7 @@
 
         <div class="row featurette">
             <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading">By {{$post->getArtistName()}}</h2>
+                <h2 class="artist-a">By <a href="{{route('artistSingle', $post->artist->id)}}" style="color:#17a2b8; hover"> {{$post->getArtistName()}}</a>
                 <br>
                 <p class="lead">{{ $post->content }}</p>
                 @if($post->category)

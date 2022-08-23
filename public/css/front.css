@@ -5017,6 +5017,17 @@ Responsive
     .milestone h2 {
         font-size: 50px;
     }
+
+    .artist-a {
+    }
+
+    .artist-a a {
+        color: #17a2b8;
+    }
+
+    .artist-a a:hover {
+        color: #081624;
+    }
 }
 
 /*!
