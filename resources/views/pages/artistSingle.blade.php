@@ -16,7 +16,7 @@
             </div>
         </div>
         <br>
-        <h2 class="gallery-title">{{$artist->artist_name}} Portfolios</h2>
+        <h2 class="gallery-title">Portfolios</h2>
         <div class="row">
             @foreach($posts as $post)
                 <div class="col-md-4">
@@ -47,7 +47,7 @@
         <section class="gallery-slider-section">
             @if(sizeof($artist->exhibitions))
                 <div class="sp-container">
-                    <h2 class="gallery-title">{{$artist->artist_name}} Exhibitions</h2>
+                    <h2 class="gallery-title">Exhibitions</h2>
                 </div>
                 <div class="gallery-slider owl-carousel">
                     @foreach($exhibitions as $item)
